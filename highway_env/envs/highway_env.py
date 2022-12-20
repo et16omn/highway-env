@@ -12,7 +12,7 @@ from highway_env.vehicle.kinematics import Vehicle
 
 Observation = np.ndarray
 
-## dasdasdsdasdsadsa
+
 class HighwayEnv(AbstractEnv):
     """
     A highway driving environment.
@@ -31,7 +31,7 @@ class HighwayEnv(AbstractEnv):
             "action": {
                 "type": "DiscreteMetaAction",
             },
-            "lanes_count": 4,
+            "lanes_count": 8,
             "vehicles_count": 50,
             "controlled_vehicles": 1,
             "initial_lane_id": None,
@@ -88,7 +88,7 @@ class HighwayEnv(AbstractEnv):
         :return: the corresponding reward
         """
         rewards = self._rewards(action)
-        print(rewards)
+        
         reward = sum(self.config.get(name, 0) * reward for name, reward in rewards.items())
         if self.config["normalize_reward"]:
             reward = utils.lmap(reward, [self.config["collision_reward"]+self.config["lane_change_reward"],
